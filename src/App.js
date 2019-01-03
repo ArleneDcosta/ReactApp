@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+// import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -60,6 +61,7 @@ class App extends Component {
 
   let persons = null;
   let btnClass = '';
+  // only for list or else can be carried out that the respective pages
   if(this.state.showPersons){
     persons = (
       <div>
@@ -74,6 +76,7 @@ class App extends Component {
             changed={(event) => this.namechangedHandler(event,person.id)}/>//earlier it was just a reference and 
             //when event occurred method was called as event was default but here on changed event the anonymous 
             //function gets executed and event is passed as para
+            //forEach just mutates doesnt return for an array however map returns 
           })}
            
       </div> 
