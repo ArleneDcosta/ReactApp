@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Person.css';
 // Radium is default export and StyleRoot is named default
 
-const person = (props) => {
+const person = (props) => {//this paranthesis is used only when returning jsx or else paranthesis can be avoided
 
 	
 	//it will overwrite class setting in the css default format

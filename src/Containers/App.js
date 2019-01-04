@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from '../Components/Persons/Person/Person';
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
@@ -60,48 +61,25 @@ class App extends Component {
     
 
   let persons = null;
-  let btnClass = '';
+  
   // only for list or else can be carried out that the respective pages
   if(this.state.showPersons){
-    persons = (
-      <div>
-          {this.state.persons.map((person,index) => { //wrap in an extra paranthesis when more one parameters--index is 
-            //callback         //index is a callback from map function 
-            //a callback function is a function which starts its execution after a function called completes its execution
-            return <Person
-            name={person.name}
-            age={person.age}
-            click={() => this.deletePersonHandler(index)}
-            key={person.id}
-            changed={(event) => this.namechangedHandler(event,person.id)}/>//earlier it was just a reference and 
-            //when event occurred method was called as event was default but here on changed event the anonymous 
-            //function gets executed and event is passed as para
-            //forEach just mutates doesnt return for an array however map returns 
-          })}
-           
-      </div> 
+    persons = 
+        <Persons
+        persons={this.state.persons}
+        click={this.deletePersonHandler}
+        changed={this.namechangedHandler}/>
 
-      );
-     btnClass = classes.Red;
-}
+      }
 
-  const assignedClasses = [];
-  if (this.state.persons.length<=2)
-  {
-    assignedClasses.push(classes.red);
-  }
-  if (this.state.persons.length<=1)
-  {
-    assignedClasses.push(classes.bold);
-  }
-  console.log(classes);
+  
     return (
     
       <div className={classes.App}>
-        <h1>Hi,Im a React app</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!!!</p>
-        <button className={btnClass}         
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          <Cockpit 
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          togglePersons={this.togglePersonsHandler}/>
           {persons}
       </div>
     
@@ -149,4 +127,16 @@ export default App;
 //   only on onClick so the arrow was initialised at the beginning only on the onClick method the arrow function will get executed
 // or onClick = { this.switchNameHandler.bind(this,newName) }
 //   This inside bind deals with the this.setState
-//
+//this refers to the object of the scope where it is called 
+//eg:myFunction();;this==window
+//var myMethod = function () {
+//   console.log(this);
+// };
+
+// var myObject = {
+//   myMethod: myMethod
+// };
+// myObject.myMethod() // this === myObject
+// myMethod() // this === window
+//Bind function == function.bind(object) --har binding or else normal binding when new operator is used 
+// bind() returns a new function that is hard-coded to call the original function with the this context set as you specified.
