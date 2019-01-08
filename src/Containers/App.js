@@ -1,10 +1,25 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './App.css';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
-class App extends Component {
+class App extends PureComponent {
+  constructor(props){
+    super(props);//component is called and with papams passed to app to make sure app is an instance of comp
+    console.log('[App.js] inside constructor',props,this);//Normally react calls super but when we create
+    //we overrwrite react's default
+    //this.state = initialse like below will work in older versions
+  }
+
+  componentWillMount(){
+    console.log('[App.js] inside componentWillMount');
+
+  }
+
+  componentDidMount(){
+    console.log('[App.js] inside componentDidMount',this);
+  }
   state = {
     persons:[
     { id:'sjdslsl',name:"Arlene",age:20},
@@ -13,6 +28,21 @@ class App extends Component {
     { id:'asaiksjak',name:'Rita',age:50}
     ],
     showPersons:false
+  }
+
+  // shouldComponentUpdate(nextProps,nextState){
+  //   console.log('[UPDATE App.js]Inside shouldComponentUpdate',nextProps,nextState,this.props.persons);
+  //   return nextState.persons !==this.state.persons||
+  //          nextState.showPersons!==this.state.showPersons;//updating continues(true) or else stops(false) the whole process
+
+  // }//this.props determines non-updated or old state and after shouldcomponentupdate will get updated but will render
+  //only if true or false
+  componentWillUpdate(nextProps,nextState){
+    console.log('[UPDATE App.js]Inside componentWillUpdate',nextProps,nextState,this.props.persons);
+  }
+  
+   componentDidUpdate(){
+    console.log('[UPDATE App.js]Inside componentDidUpdate',this.props.persons);
   }
 
   // switchNameHandler = (newName) => {
@@ -59,7 +89,8 @@ class App extends Component {
 
   render() {
     
-
+  console.log('[App.js] inside render');
+  console.log(this.state.persons);
   let persons = null;
   
   // only for list or else can be carried out that the respective pages
@@ -76,6 +107,8 @@ class App extends Component {
     return (
     
       <div className={classes.App}>
+          <br/>
+          <button onClick={() => {this.setState({showPersons:true})}}>Show Persons</button>
           <Cockpit 
           apptitle={this.props.title}
           persons={this.state.persons}
@@ -97,7 +130,9 @@ export default App;
 
 
 
-
+//component lifecycle methods:
+//*constructor,*componentwillmount(),componentwillrecieveprops(),shouldcomponentupdate(),componentwillupdate()
+//componentdidupdate(),componentdidcatch(),*componentdidmount(),componentwillunmount(),*render(),sec7lec83
 
 
 
