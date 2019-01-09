@@ -56,10 +56,13 @@ class Persons extends PureComponent {
             //when event occurred method was called as event was default but here on changed event the anonymous 
             //function gets executed and event is passed as para
             //forEach just mutates doesnt return for an array however map returns 
+            //map applies a function on every element in the array.A new array is returned.
           });
 
 	}
 } 
 export default Persons;
 //here no jsx only pure javascript thus no paranthesis
+//here above array is returned or rendered (Remember:
+//render only creates a virtual dom compares with old dom and makes appropriate changes accordingly)
 
