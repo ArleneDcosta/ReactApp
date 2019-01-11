@@ -30,7 +30,8 @@ class App extends PureComponent {
     { id:'paspapjd',name:'Antony',age:54},
     { id:'asaiksjak',name:'Rita',age:50}
     ],
-    showPersons:false
+    showPersons:false,
+    toggleClicked:0
   }
 
   // shouldComponentUpdate(nextProps,nextState){
@@ -80,7 +81,12 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState,props) => {
+      return {
+          showPersons: !doesShow,
+           toggleClicked:prevState.toggleClicked + 1
+        }
+    });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -179,3 +185,6 @@ export default withClass(App,classes.App);
 // myMethod() // this === window
 //Bind function == function.bind(object) --har binding or else normal binding when new operator is used 
 // bind() returns a new function that is hard-coded to call the original function with the this context set as you specified.
+
+
+//setstate is a method executed asynchronously by react
