@@ -1,14 +1,36 @@
-import React from 'react';
+import React,{Component}from 'react';
 
 
-const withClass = (props) => (
-	<div className={props.classes}>
-		{props.children}
+// const withClass = (props) => (
+// 	<div className={props.classes}>
+// 		{props.children}
 
-	</div>
+// 	</div>
 
 
-);
+// );
+// const withClass = (WrappedComponent, className) => {
+// 	return (props) => (
+// 		<div className={className}>
+// 			<WrappedComponent {...props}/>
+// 		</div>
+// 	)
+// }
+
+
+const withClass = (WrappedComponent, className) => {
+	return class extends Component{
+		render(){
+			return (
+				<div className={className}>
+					<WrappedComponent {...this.props}/>
+				</div>
+				)
+		}
+	}
+}
 
 
 export default withClass;
+//{...props}will pass as the component it will be getting
+//second one is stateful component which returns anonymous class 

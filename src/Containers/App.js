@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import classes from './App.css';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import Auxiliary from '../hoc/Auxiliary';
+import withClass from '../hoc/withClass';
+
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends PureComponent {
@@ -107,7 +109,7 @@ class App extends PureComponent {
   
     return (
     
-      <WithClass classes={classes.App}>
+      <Auxiliary>
           <br/>
           <button onClick={() => {this.setState({showPersons:true})}}>Show Persons</button>
           <Cockpit 
@@ -116,14 +118,14 @@ class App extends PureComponent {
           showPersons={this.state.showPersons}
           togglePersons={this.togglePersonsHandler}/>
           {persons}
-      </WithClass>
+      </Auxiliary>
     
     ); 
      // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Hi,Im a React App!!!!'));
   }
 }
 
-export default App;
+export default withClass(App,classes.App);
 //higher order component
 //wrapping ur component into the higher order component adding a 
 //specific functionality to ur component class as well as functional 
