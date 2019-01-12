@@ -25,12 +25,10 @@ class Person extends Component {
   }
 
   focusInput(){
-  	
-    
-    	this.inputElement.current.focus();
+  		this.inputElement.current.focus();
     }
     //current holds the access to the element we stored to the reference or where we assigned the reference
-    //to
+    //to(thateg DOM node or input element)
   
 	render(){
 		console.log('[Person.js] inside render');

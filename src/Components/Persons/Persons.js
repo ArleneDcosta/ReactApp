@@ -69,4 +69,8 @@ export default Persons;
 //here no jsx only pure javascript thus no paranthesis
 //here above array is returned or rendered (Remember:
 //render only creates a virtual dom compares with old dom and makes appropriate changes accordingly)
+//here ref is passed to the person and using forwardrefs its passed to the higher order component 
+//and to the person and now the person component can be accessed
+//Here though current focus wants to access person component it cannot as there is higher order component 
+//in between .However with forward ref it acts as a tunnel for direct access from one component to another.
 
