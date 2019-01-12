@@ -9,6 +9,7 @@ class Persons extends PureComponent {
     console.log('[Persons.js] inside constructor',props);//Normally react calls super but when we create
     //we overrwrite react's default
     //this.state = initialse like below will work in older versions
+    this.lastPersonRef = React.createRef();
   }
 
   componentWillMount(){
@@ -18,6 +19,7 @@ class Persons extends PureComponent {
 
   componentDidMount(){
     console.log('[Persons.js] inside componentDidMount');
+    this.lastPersonRef.current.focusInput();
   }
 
   componentWillReceiveProps(nextProps){
@@ -51,6 +53,8 @@ class Persons extends PureComponent {
             click={() => this.props.click(index)}
             name={person.name}
             age={person.age}
+            position={index}
+            ref={this.lastPersonRef}
          	key={person.id}
             changed={(event) => this.props.changed(event,person.id)} />//earlier it was just a reference and 
             //when event occurred method was called as event was default but here on changed event the anonymous 

@@ -7,9 +7,11 @@ import Auxiliary from '../../../hoc/Auxiliary';
 class Person extends Component {
 	 constructor(props){
     super(props);//component is called and with papams passed to app to make sure app is an instance of comp
-    console.log('[Person.js] inside constructor',props);//Normally react calls super but when we create
+    console.log('[Person.js] inside constructor',props);
+    //Normally react calls super but when we create
     //we overrwrite react's default
     //this.state = initialse like below will work in older versions
+    this.inputElement = React.createRef();
   }
 
   componentWillMount(){
@@ -19,14 +21,28 @@ class Person extends Component {
 
   componentDidMount(){
     console.log('[Person.js] inside componentDidMount');
+    
   }
+
+  focusInput(){
+  	
+    
+    	this.inputElement.current.focus();
+    }
+    //current holds the access to the element we stored to the reference or where we assigned the reference
+    //to
+  
 	render(){
 		console.log('[Person.js] inside render');
 		return ( 
 		<Auxiliary>
 		<p onClick={this.props.click}>Im {this.props.name} and I am {this.props.age} years old!!</p>
 		<p>{this.props.children}</p>
-		<input type='text' onChange={this.props.changed} value={this.props.name}/>
+		<input 
+			ref={ this.inputElement}
+			type='text' 
+			onChange={this.props.changed} 
+			value={this.props.name}/>
 		</Auxiliary>
 		)
 		// return [
