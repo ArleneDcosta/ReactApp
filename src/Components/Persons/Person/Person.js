@@ -4,6 +4,7 @@ import classes from './Person.css';
 import withClass from '../../../hoc/withClass';
 import Auxiliary from '../../../hoc/Auxiliary';
 // Radium is default export and StyleRoot is named default
+import { AuthContext } from '../../../Containers/App';
 class Person extends Component {
 	 constructor(props){
     super(props);//component is called and with papams passed to app to make sure app is an instance of comp
@@ -34,6 +35,9 @@ class Person extends Component {
 		console.log('[Person.js] inside render');
 		return ( 
 		<Auxiliary>
+		<AuthContext.Consumer>
+			{ auth => auth ? <p>I am authenticated!!!!!!</p> : null}
+		</AuthContext.Consumer>
 		<p onClick={this.props.click}>Im {this.props.name} and I am {this.props.age} years old!!</p>
 		<p>{this.props.children}</p>
 		<input 

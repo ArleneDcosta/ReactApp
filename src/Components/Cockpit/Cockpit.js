@@ -26,12 +26,15 @@ const cockpit = (props) => {
         <p className={assignedClasses.join(' ')}>This is really working!!!</p>
         <button className={btnClass}         
           onClick={props.togglePersons}>Toggle Persons</button>
+         <br/>
+         <br/>
+         <button onClick={props.login}>Log in</button>
          </Auxiliary>
 		);
 };
 
 //since wrapping div is removed (css class) an array can be returned however another alternative is
-export default cockpit; 
+export default React.memo(cockpit); 
 
 // for list no need div tag and no paranthesis like normal javascript map function and only need to return dire
 //ect jsx from map function which is just javascript

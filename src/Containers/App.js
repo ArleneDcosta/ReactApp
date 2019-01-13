@@ -7,6 +7,9 @@ import withClass from '../hoc/withClass';
 
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
+export const AuthContext = React.createContext(false);
+//creates a component that can be used in JSX
+
 class App extends PureComponent {
   constructor(props){
     super(props);//component is called and with papams passed to app to make sure app is an instance of comp
@@ -31,7 +34,8 @@ class App extends PureComponent {
     { id:'asaiksjak',name:'Rita',age:50}
     ],
     showPersons:false,
-    toggleClicked:0
+    toggleClicked:0,
+    authenticated:false
   }
 
   // shouldComponentUpdate(nextProps,nextState){
@@ -44,7 +48,22 @@ class App extends PureComponent {
   componentWillUpdate(nextProps,nextState){
     console.log('[UPDATE App.js]Inside componentWillUpdate',nextProps,nextState,this.props.persons);
   }
-  
+
+  static getDerivedStateFromProps(nextProps,prevState){
+    console.log('[UPDATE App.js]Inside getDerivedStateFromProps',nextProps,prevState,this.props.persons);
+
+    return prevState;
+  }
+  //here recieve the changed props as well as states can be changed through this method before it is rendered.
+   
+   getSnapshotBeforeUpdate(){
+       console.log('[UPDATE App.js]Inside getSnapshotBeforeUpdate');
+   }
+
+
+
+
+
    componentDidUpdate(){
     console.log('[UPDATE App.js]Inside componentDidUpdate',this.props.persons);
   }
@@ -96,6 +115,11 @@ class App extends PureComponent {
     this.setState({persons:persons}) //pushing and popping is allowed in const
   }
 
+  loginHandler = () => {
+    this.setState({authenticated:true});
+
+  }
+
   render() {
     
   console.log('[App.js] inside render');
@@ -108,7 +132,9 @@ class App extends PureComponent {
         <Persons
         persons={this.state.persons}
         click={this.deletePersonHandler}
-        changed={this.namechangedHandler}/>
+        changed={this.namechangedHandler}
+        //isAuthenticated={this.state.authenticated}
+        />
 
       }
 
@@ -122,8 +148,9 @@ class App extends PureComponent {
           apptitle={this.props.title}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
+          login={this.loginHandler}
           togglePersons={this.togglePersonsHandler}/>
-          {persons}
+          <AuthContext.Provider value={this.state.authenticated}>{persons}</AuthContext.Provider>
       </Auxiliary>
     
     ); 
@@ -188,3 +215,11 @@ export default withClass(App,classes.App);
 
 
 //setstate is a method executed asynchronously by react
+
+
+//whenever there is import of components and export of createcontext method then there is circular 
+//dependency thus the context wont work
+//if a dom element has to be dynamically changed then it has to be static to avoid change from other
+//components .
+// Thus to allow changing props from one component to another through intermediate then autocontext is used.
+//

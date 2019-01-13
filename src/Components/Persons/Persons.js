@@ -55,6 +55,7 @@ class Persons extends PureComponent {
             age={person.age}
             position={index}
             ref={this.lastPersonRef}
+            // authenticated={this.props.isAuthenticated}
          	key={person.id}
             changed={(event) => this.props.changed(event,person.id)} />//earlier it was just a reference and 
             //when event occurred method was called as event was default but here on changed event the anonymous 
